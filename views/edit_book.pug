@@ -1,0 +1,23 @@
+h1= title
+  
+  form(method='POST' action='')
+    div.form-group
+      label(for='author')
+      input#author.form-control(type='text', placeholder='Author' name='author' value=book_author)
+
+      br
+
+      label(for='title')
+      input#title.form-control(type='text', placeholder='Title' name='title' value=book_title)
+
+      br
+
+      label(for='description')
+      input#description.form-control(type='text', placeholder='Description' name='description' value=book_description)
+
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg
