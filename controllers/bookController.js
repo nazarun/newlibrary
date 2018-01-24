@@ -1,7 +1,8 @@
 var Book = require('../models/book');
 
-/*
+
 var multer = require('multer');
+//var upload = multer({ dest: 'files/' });
 //Multer storage settings
 var storage = multer.diskStorage({
 	destination: function(req, file, callback) {
@@ -13,7 +14,7 @@ var storage = multer.diskStorage({
 	}
 })
 //End of multer storage settings
-*/
+
 
 // Display list of all Books 
 exports.books_list = function(req, res, next){
@@ -60,7 +61,7 @@ exports.book_upload_get = function(req, res, next){
 };
 
 
-/*
+
 // POST upload files
 exports.book_upload_post = function(req, res, next){
 	//file upload    
@@ -72,7 +73,7 @@ exports.book_upload_post = function(req, res, next){
 	})
     //end of file upload
 };
-*/
+
 
 
 

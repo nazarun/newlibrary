@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var busboy = require('connect-busboy');
 var fileUpload = require('express-fileupload');
-
+var multer = require('multer');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 

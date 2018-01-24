@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 
-//var upload = multer({ dest: 'files/' });
+
 
 
 
@@ -27,7 +27,7 @@ router.post('/create', book_controller.book_create_post);
 router.get('/upload', book_controller.book_upload_get);
 
 // POST request for Uploading files.
-//router.post('/upload', book_controller.book_upload_post); 
+router.post('/upload', book_controller.book_upload_post); 
   
  
 // GET request for one Book.
