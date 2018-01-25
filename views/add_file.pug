@@ -6,10 +6,35 @@ block content
   form(method='POST' action='' enctype='multipart/form-data')
     div.form-group      
 
-      label(for='fileUpload')
-      input#file.form-control(type='file', name='fileUpload' )     
+      label(for='author')
+      input#author.form-control(type='text', placeholder='Author' name='author' value=book_author)
 
-    button.btn.btn-primary(type='submit') Submit
+      br
+
+      label(for='fileUpload')
+      input#file.form-control(type='file', placeholder='Upload file' name='fileUpload' )
+
+      br
+
+      label(for='title')
+      input#title.form-control(type='text', placeholder='Title' name='title' value=book_title)
+
+      br
+
+      label(for='description')
+      input#description.form-control(type='text', placeholder='Description' name='description' value=book_description)
+
+      br
+
+      label(for='status')
+      select#status.form-control(name='status' value=book_status)
+          option -- Status --
+          option(value='On') On
+          option(value='Off') Off
+
+      br
+      
+      button.btn.btn-primary(type='submit') Submit
 
   if errors 
     ul

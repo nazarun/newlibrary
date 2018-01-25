@@ -43,7 +43,12 @@ exports.book_create_get = function(req, res, next) {
 
 // Handle Book create on POST.
 exports.book_create_post = function(req, res, next) {
-    // res.send('NOT IMPLEMENTED: BookInstance create POST');    
+    // res.send('NOT IMPLEMENTED: BookInstance create POST');   
+    // var upload = multer({ dest: './uploads/' });
+    // upload.single('fileUpload'), function(req,res,next){
+    // 	res.res.status(200).next();
+    // }
+
     var book = new Book(req.body);
     book.save(function(err){
     	if (err) { return next(err); }
