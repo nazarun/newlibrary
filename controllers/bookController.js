@@ -1,18 +1,18 @@
 var Book = require('../models/book');
 
 
-var multer = require('multer');
+//var multer = require('multer');
 //var upload = multer({ dest: 'files/' });
 //Multer storage settings
-var storage = multer.diskStorage({
-	destination: function(req, file, callback) {
-		callback(null, 'public/images/')
-	},
-	filename: function(req, file, callback) {
-		console.log(file)
-		callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-	}
-})
+// var storage = multer.diskStorage({
+// 	destination: function(req, file, callback) {
+// 		callback(null, 'public/images/')
+// 	},
+// 	filename: function(req, file, callback) {
+// 		console.log(file)
+// 		callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+// 	}
+// })
 //End of multer storage settings
 
 
@@ -63,16 +63,16 @@ exports.book_upload_get = function(req, res, next){
 
 
 // POST upload files
-exports.book_upload_post = function(req, res, next){
-	//file upload    
-	var upload = multer({
-		storage: storage
-	}).single('file')
-	upload(req, res, function(err) {
-		res.end('File is uploaded')
-	})
-    //end of file upload
-};
+// exports.book_upload_post = function(req, res, next){
+// 	//file upload    
+// 	var upload = multer({
+// 		storage: storage
+// 	}).single('file')
+// 	upload(req, res, function(err) {
+// 		res.end('File is uploaded')
+// 	})
+//     //end of file upload
+// };
 
 
 

@@ -5,9 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var fs = require('fs');
-var busboy = require('connect-busboy');
-var fileUpload = require('express-fileupload');
+//var fs = require('fs');
+//var busboy = require('connect-busboy');
+//var fileUpload = require('express-fileupload');
 var multer = require('multer');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
@@ -58,8 +58,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(fileUpload());
-app.use(busboy());
+//app.use(fileUpload());
+//app.use(busboy());
 
 
 app.use('/', index);

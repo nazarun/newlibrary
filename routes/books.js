@@ -1,16 +1,11 @@
 var express = require('express');
 var router = express.Router();
-
-
-
-
-
-
-
-
-
 // Require controller modules.
 var book_controller = require('../controllers/bookController');
+
+
+var multer  = require('multer');
+var upload = multer({ dest: './uploads/' });
 
 //Book routes//
 
@@ -27,7 +22,11 @@ router.post('/create', book_controller.book_create_post);
 router.get('/upload', book_controller.book_upload_get);
 
 // POST request for Uploading files.
-router.post('/upload', book_controller.book_upload_post); 
+router.post('/upload', upload.single('fileUpload'), function(req,res,next){
+
+	console.log(req.file);
+	res.send('File uploaded');
+}); 
   
  
 // GET request for one Book.

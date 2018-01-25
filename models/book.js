@@ -6,7 +6,7 @@ var BookSchema = new Schema({
 	title: {type: String, required: true},
 	description: {type: String, required: true},
 	status: {type: String, required: true},
-	//file: {type: String}	 
+	//fileUpload: {type: String}	 
 });
 
 //a virtual for getting the URL of specific book records

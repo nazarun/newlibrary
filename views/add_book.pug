@@ -3,15 +3,15 @@ extends layout
 block content
   h1= title
   
-  form(method='POST' action='')
+  form(method='POST' action='' )
     div.form-group
       label(for='author')
       input#author.form-control(type='text', placeholder='Author' name='author' value=book_author)
 
       br
 
-      label(for='file')
-      input#file.form-control(type='file', placeholder='Upload file' name='file' )
+      label(for='fileUpload')
+      input#file.form-control(type='file', placeholder='Upload file' name='fileUpload' )
 
       br
 
