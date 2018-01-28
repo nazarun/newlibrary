@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-//var fs = require('fs');
+var fs = require('fs');
 //var busboy = require('connect-busboy');
 //var fileUpload = require('express-fileupload');
 var multer = require('multer');

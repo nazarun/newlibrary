@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  h1= title
+  
+  form(method='POST' action='/users')
+    div.form-group
+      label(for='email')
+      input(name = "email" type = "text" placeholder = "Email Address")
+
+      br
+
+      label(for='password')
+      input(name = "password" type = "password" placeholder = "Password" )
+
+      br
+
+      label(for='passwordConf')
+      input(name = "passwordConf" type = "password" placeholder = "Confirm Password")
+
+      
+
+    button.btn.btn-primary(type='submit') Sign Up
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg

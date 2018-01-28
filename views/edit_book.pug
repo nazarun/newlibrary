@@ -1,9 +1,17 @@
-h1= title
+extends layout
+
+block content
+  h1= title
   
-  form(method='POST' action='')
+  form(method='POST' action='' enctype='multipart/form-data')
     div.form-group
       label(for='author')
       input#author.form-control(type='text', placeholder='Author' name='author' value=book_author)
+
+      br
+
+      label(for='fileUpload')
+      input#file.form-control(type='file', required, name='fileUpload' value=book_fileUpload )
 
       br
 
@@ -14,6 +22,14 @@ h1= title
 
       label(for='description')
       input#description.form-control(type='text', placeholder='Description' name='description' value=book_description)
+
+      br
+
+      label(for='status')
+      select#status.form-control(name='status' value=book_status)
+          option -- Status --
+          option(value='On') On
+          option(value='Off') Off
 
     button.btn.btn-primary(type='submit') Submit
 

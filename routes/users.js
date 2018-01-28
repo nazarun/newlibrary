@@ -2,13 +2,20 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.render('login.pug');
+/* GET Sign Up */
+router.get('/signup', function(req, res, next) {
+  res.render('signup', {title: 'Sign up'});
 });
+
+router.get('/login', function(req, res, next) {
+  res.render('login', {title: 'Login'});
+});
+
 
 //POST route for updating data
 router.post('/', function (req, res, next) {
+  
+
   // confirm that user typed same password twice
 
   if (req.body.password !== req.body.passwordConf) {
@@ -26,17 +33,18 @@ router.post('/', function (req, res, next) {
       email: req.body.email,      
       password: req.body.password,
       passwordConf: req.body.passwordConf,
-    };
+    }
 
     User.create(userData, function (error, user) {
       if (error) {
         return next(error);
       } else {
         req.session.userId = user._id;
-        res.status(200).redirect('/profile'); //?????
+        res.status(200).redirect('/users/profile'); 
       }
     });
 
+// Login code
   } else if (req.body.logemail && req.body.logpassword) { //names of inputs of just login form
     User.authenticate(req.body.logemail, req.body.logpassword, function (error, user) {
       if (error || !user) {
@@ -45,7 +53,7 @@ router.post('/', function (req, res, next) {
         return next(err);
       } else {
         req.session.userId = user._id;
-        return res.redirect('/profile');
+        return res.redirect('/users/profile');
       }
     });
   } else {
@@ -53,7 +61,10 @@ router.post('/', function (req, res, next) {
     err.status = 400;
     return next(err);
   }
+
 })
+
+
 
 // GET route after registering
 router.get('/profile', function (req, res, next) {
@@ -67,13 +78,13 @@ router.get('/profile', function (req, res, next) {
           err.status = 400;
           return next(err);
         } else {
-          return res.send('<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
+          return res.send('<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/users/logout">Logout</a>')
         }
       }
     });
 });
 
-// GET for logout logout
+// GET for logout 
 router.get('/logout', function (req, res, next) {
   if (req.session) {
     // delete session object

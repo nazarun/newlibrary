@@ -8,3 +8,5 @@ block content
   p= book_detail.description
   p= book_detail.status
   p= book_detail.fileUpload
+  p= book_detail.url
+  a(href= book_detail.url + "/download") Download

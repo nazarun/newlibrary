@@ -1,20 +1,23 @@
 extends layout
 
 block content
-         
-         form(method = "POST" action = "" )
+  h1= title
+  
+  form(method='POST' action='/users')
+    div.form-group
+      label(for='logemail')
+      input(name = "logemail" type = "text" placeholder = "Email Address")
 
-         input(name = "email" type = "text" placeholder = "Email Address")
+      br
 
-         br
+      label(for='logpassword')
+      input(name = "logpassword" type = "password" placeholder = "Password" )
 
-         input(name = "password" type = "password" placeholder = "Password")
+      
 
-         br
+    button.btn.btn-primary(type='submit') Login
 
-         input(name = "passwordConf" type = "password" placeholder = "Confirm Password")
-
-         br
-
-         a(href = "#") Sign in
-         button.btn.btn-primary(type = "submit") Sign up
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg

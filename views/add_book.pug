@@ -3,25 +3,25 @@ extends layout
 block content
   h1= title
   
-  form(method='POST' action='' )
+  form(method='POST' action='' enctype='multipart/form-data')
     div.form-group
       label(for='author')
-      input#author.form-control(type='text', placeholder='Author' name='author' value=book_author)
+      input#author.form-control(type='text', required, placeholder='Author' name='author' value=book_author)
 
       br
 
       label(for='fileUpload')
-      input#file.form-control(type='file', placeholder='Upload file' name='fileUpload' )
+      input#file.form-control(type='file', required, name='fileUpload' value=book_fileUpload )
 
       br
 
       label(for='title')
-      input#title.form-control(type='text', placeholder='Title' name='title' value=book_title)
+      input#title.form-control(type='text', required, placeholder='Title' name='title' value=book_title)
 
       br
 
       label(for='description')
-      input#description.form-control(type='text', placeholder='Description' name='description' value=book_description)
+      input#description.form-control(type='text', required, placeholder='Description' name='description' value=book_description)
 
       br
 

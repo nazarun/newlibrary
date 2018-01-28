@@ -16,24 +16,24 @@ router.get('/', book_controller.books_list);
 router.get('/create', book_controller.book_create_get);
 
 // POST request for creating Book.
-router.post('/create', book_controller.book_create_post);
+//router.post('/create', book_controller.book_create_post);
 
-// GET request for Uploading files.
-router.get('/upload', book_controller.book_upload_get);
-
-// POST request for Uploading files.
-router.post('/upload', upload.single('fileUpload'), function(req,res,next){
-
+// POST request for creating Book.
+router.post('/create', upload.single('fileUpload'), function(req,res,next){
 	console.log(req.file.path);
 	console.log(req.body);
 	//res.send('File uploaded');
-	var book = new Book(req.body);
+	var book = new Book({
+		author: req.body.author,
+		title: req.body.title,
+		description: req.body.description,
+		status: req.body.status,
+		fileUpload: req.file.path
+	});
     book.save(function(err){
-    	if (err) { return next(err); }
-    	
+    	if (err) { return next(err); }    	
     	res.status(200).redirect('/books');
     });
-	
 }); 
   
  
@@ -44,11 +44,28 @@ router.get('/:id', book_controller.book_detail);
 router.get('/:id/edit', book_controller.book_edit_get);
 
 // POST request to edit Book.
-router.post('/:id/edit', book_controller.book_edit_post);
+router.post('/:id/edit', upload.single('fileUpload'), function(req, res, next) {
+	var book = new Book({
+		_id: req.params.id,
+		author: req.body.author,
+		title: req.body.title,
+		description: req.body.description,
+		status: req.body.status,
+		fileUpload: req.file.path	 //Not Implemented - Need to add OPTIONAL file changing	
+	});
+	
+    Book.findByIdAndUpdate(req.params.id, book, {}, function(err, thebook){
+    	if (err) { return next(err); }
+       // Successful - redirect to book detail page.
+       res.redirect(thebook.url);       
+    })
+});
 
-//DELETE
+
+//Download Book
+router.get('/:id/download', book_controller.book_download);
+
+//DELETE Book
 router.get('/:id/delete', book_controller.book_delete);
-
-
 
 module.exports = router;
