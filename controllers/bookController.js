@@ -108,6 +108,6 @@ exports.book_delete = function(req, res, next){
 		if (err) { return next(err); }
 		doc.remove();
     console.log("Deleted");
-    res.status(200).redirect('/books');
-  });  
+    res.status(200).redirect('/books'); 
+  });   
 }

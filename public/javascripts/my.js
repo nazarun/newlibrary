@@ -82,7 +82,7 @@ app.directive('allBooks', function(){
                     $scope.bookStatus = status;  
                     $scope.bookId = _id;
                     $scope.action = 'http://localhost:3000/books/' + _id + '/edit';
-                    $scope.bookEditFormStatus = true; //show edit form
+                    $scope.bookEditFormStatus = true; 
                     $scope.bookDetailsStatus = false;
             }, function errorCallback(response) {
                 console.log("Error!!!" + response.err);
@@ -92,9 +92,10 @@ app.directive('allBooks', function(){
 
             //Delete book
             $scope.deleteBook = function(_id){
-                $http.get('http://localhost:3000/books/' + _id + '/delete')
+                 $http.get('http://localhost:3000/books/' + _id + '/delete')
                 .then(function successCallback(response){
-                    console.log("Deleted!");                    
+                                    
+                    console.log("Deleted!");
                 }, function errorCallback(response) {
                 console.log("Error!!!" + response.err);
             });
@@ -110,8 +111,7 @@ app.directive('menu', function(){
     return {
         replace: true,
         templateUrl: 'templates/menu.html',
-        controller: function($scope, $http){
-           // $scope.allBooks = true;
+        controller: function($scope, $http){           
            $scope.menuStatus = false;
            $scope.userDataStatus = true;
            $scope.logoutStatus = true;
@@ -153,8 +153,7 @@ app.directive('menu', function(){
 
             $http.get('http://localhost:3000/users/profile')
             .then(function successCallback(response){
-                $scope.userData = response.data;
-                console.log($scope.userData);
+                $scope.userData = response.data;                
             }, function errorCallback(response) {
                 console.log("Error!!!" + response.err);
             });
@@ -163,8 +162,7 @@ app.directive('menu', function(){
             //logout
             $scope.logout = function(){
                 $http.get('http://localhost:3000/users/logout')
-                .then(function successCallback(response){
-                    console.log("Logged out!");
+                .then(function successCallback(response){                    
                     $scope.userData = "";
                     $scope.logoutStatus = false;
                 }, function errorCallback(response) {
@@ -218,3 +216,12 @@ app.directive('login', function(){
         }
     }
 });
+
+//Rating
+app.controller('StarCtrl', ['$scope', function ($scope) {
+            $scope.maxRating = 5;
+            $scope.ratedBy = 0;
+            $scope.rateBy = function (star) {
+                $scope.ratedBy = star;
+            }
+        }]);

@@ -25,8 +25,13 @@
 			        <td>{{$index + 1}}</td>
 			        <td>{{a.author}}</td>
 			        <td ng-click="showDetails(a._id, a.author, a.title, a.description)">{{a.title}}</td>
-			        <td>Rating
-			        
+			        <td ng-controller="StarCtrl">
+			        	<ul class="rating">
+				            <li ng-repeat="n in [].constructor(maxRating) track by $index">
+				                <span ng-click="rateBy($index+1)" ng-show="ratedBy > $index" class="filled">&#9733;</span>
+				                <span ng-click="rateBy($index+1)" ng-show="ratedBy <= $index">&#9733;</span>
+				            </li>
+        				</ul>
 			        </td>
 			        <td>
 			        	on<input id="on" type="radio"  ng-model="a.status" value="ON" > {{a.status}}       
