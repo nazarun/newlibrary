@@ -32,7 +32,7 @@ router.post('/create', upload.single('fileUpload'), function(req,res,next){
 	});
     book.save(function(err){
     	if (err) { return next(err); }    	
-    	res.status(200).redirect('/books');
+    	res.status(200).redirect('/');
     });
 }); 
   
@@ -57,7 +57,8 @@ router.post('/:id/edit', upload.single('fileUpload'), function(req, res, next) {
     Book.findByIdAndUpdate(req.params.id, book, {}, function(err, thebook){
     	if (err) { return next(err); }
        // Successful - redirect to book detail page.
-       res.redirect(thebook.url);       
+       // res.status(200).redirect(thebook.url); 
+       res.status(200).redirect('/');      
     })
 });
 

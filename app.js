@@ -4,10 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var fs = require('fs');
-//var busboy = require('connect-busboy');
-//var fileUpload = require('express-fileupload');
 var multer = require('multer');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
@@ -17,21 +14,13 @@ var users = require('./routes/users');
 var books = require('./routes/books');
 var app = express();
 
-
-
 //Set up mongoose connection
 var mongoose = require('mongoose');
 var mongoDB = 'mongodb://mean:mean@ds259897.mlab.com:59897/mean';
-mongoose.connect(mongoDB, {
-  
-});
+mongoose.connect(mongoDB, {});
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -49,8 +38,6 @@ app.use(session({
 }));
 
 
-
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -58,13 +45,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use(fileUpload());
-//app.use(busboy());
 
-
-app.use('/', index);
+//app.use('/', index);
 app.use('/users', users);
 app.use('/books', books);
+
+
+
+// Send all other requests to the Angular app
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,28 @@
+<div class="nav">
+    <div ng-show="menuStatus">
+        <nav class='menu'>
+            <ul>
+                <li>
+                    <a ng-click="chooseBooks()" >Books</a>
+                </li>        
+                <li>
+                    <a ng-click="chooseAddBook()" >Add</a>
+                </li>
+                 <li>
+                    <a ng-click="chooseEditBook(_id)" >Edit</a>
+                </li>         
+            </ul>            
+        </nav>
+
+        <div class="profile">
+            <div class="login-btn">
+                <button type="button" ng-click="showLogin()">User login:</button>
+            </div>
+            <div ng-show="userDataStatus">
+                {{userData}}
+                <button ng-show="logoutStatus" ng-click="logout()">Logout</button>                
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

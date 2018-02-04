@@ -18,10 +18,12 @@ var Book = require('../models/book');
 
 // Display list of all Books 
 exports.books_list = function(req, res, next){
-	Book.find({}, 'author title ').exec(function(err, data){
+	Book.find({}, 'author title status description ').exec(function(err, data){
 		if (err) { return next(err); }
 		//Successful, so render
-      	res.render('book_list', { title: 'Book List', book_list: data });
+      	// res.render('book_list', { title: 'Book List', book_list: data });
+        // res.render('index', { title: 'Book List', book_list: data });        
+        res.status(200).send(data);         
 	})
 };
 
@@ -32,13 +34,14 @@ exports.book_detail = function(req, res, next) {
    Book.findOne({_id: req.params.id}).exec(function(err, data){
    		if (err) { return next(err); }
    		//Successful, so render
-      	res.render('book_details', { title: 'Book Details', book_detail: data });
+      	//res.render('book_details', { title: 'Book Details', book_detail: data });
+        res.status(200).send(data);
    })
 };
 
 // Display Book create form on GET.
 exports.book_create_get = function(req, res, next) {	
-    res.render('add_book', {title: 'Add'});
+    //res.render('add_book', {title: 'Add'});      
 };
 
 // Handle Book create on POST.
@@ -104,6 +107,7 @@ exports.book_delete = function(req, res, next){
 	Book.findOne({_id: req.params.id}, function(err, doc){
 		if (err) { return next(err); }
 		doc.remove();
-		res.redirect('/');
-	});
+    console.log("Deleted");
+    res.status(200).redirect('/books');
+  });  
 }

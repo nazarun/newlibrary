@@ -1,0 +1,18 @@
+<!-- Add book -->
+	<div ng-show="bookAddFormStatus">
+		<h1>Add Book</h1>
+		<form method="POST" action="http://localhost:3000/books/create" role="form" enctype="multipart/form-data" >
+			<input type="file"  name="fileUpload" required><br>
+			<input type="text"  name="author" placeholder='Author' required><br>
+			<input type="text"  name="title" placeholder='Title' required><br>
+			<textarea  name="description" placeholder='Description' required></textarea><br>
+			<select name="status">
+				<option value="On">On</option>
+				<option value="Off">Off</option>
+			</select>
+			<button type="submit" >Submit</button><br>
+			<button type="button">Cancel</button>
+			
+		</form>
+	</div>
+<!-- End of Add book -->

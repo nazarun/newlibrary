@@ -1,0 +1,13 @@
+<!-- User login -->
+	<div ng-show="loginStatus">
+		<h1>User Login</h1>
+		<form method="POST" action="http://localhost:3000/users" >
+			<input name = "logemail" type = "text" placeholder = "Email Address"><br>
+			<input name = "logpassword" type = "password" placeholder = "Password"><br>			
+			
+			<button type="submit" >Login</button>
+			<button type="button" ng-click=showSignup()>Sign up</button>
+			
+		</form>
+	</div>
+<!-- End of User login -->

@@ -40,7 +40,7 @@ router.post('/', function (req, res, next) {
         return next(error);
       } else {
         req.session.userId = user._id;
-        res.status(200).redirect('/users/profile'); 
+        res.status(200).redirect('/'); 
       }
     });
 
@@ -53,7 +53,7 @@ router.post('/', function (req, res, next) {
         return next(err);
       } else {
         req.session.userId = user._id;
-        return res.redirect('/users/profile');
+        return res.redirect('/')
       }
     });
   } else {
@@ -78,7 +78,7 @@ router.get('/profile', function (req, res, next) {
           err.status = 400;
           return next(err);
         } else {
-          return res.send('<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/users/logout">Logout</a>')
+          return res.send( user.email );
         }
       }
     });
@@ -92,7 +92,7 @@ router.get('/logout', function (req, res, next) {
       if (err) {
         return next(err);
       } else {
-        return res.redirect('/');
+        return res.redirect('/users/login');
       }
     });
   }
