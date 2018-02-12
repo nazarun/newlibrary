@@ -1,0 +1,20 @@
+<!-- Edit book -->
+	<div ng-show="bookEditFormStatus">
+		<h1>Edit Book</h1>
+		<form name="editBookForm" ng-submit="updateBook(file)"   enctype="multipart/form-data" >
+			<input type="hidden" name="id" ng-model="id"><br>
+			<input type="file"  ngf-select ng-model="file" name="file" required><br>
+			<input type="text"  ng-model="author" name="author" placeholder='Author' required ><br>
+			<input type="text" ng-model="title" name="title" placeholder='Title' required ><br>
+			<textarea type="text" ng-model="description" name="description" placeholder='Description' required ></textarea><br>
+			<label for="status">Status</label>
+				<select name="status" ng-model="status" id="status">
+					<option value="On">On</option>
+					<option value="Off">Off</option>
+				</select><br>
+			<button type="submit" >Submit</button>
+			<button type="button">Cancel</button>
+			
+		</form>
+	</div>
+<!-- End of Edit book -->

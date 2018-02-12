@@ -4,7 +4,10 @@
 	<div ng-show="allBooks">
 		<div>
 			<h1 class="title">Books</h1>
-			<input type="text" id="search" placeholder="Search" ng-model="search">
+			<form>
+				<input type="text" id="search" placeholder="Search" ng-model="search">
+				<button type="submit" ng-click="searchBook()">Search</button>
+			</form>
 			<div class="clear"></div>
 		</div>
 
@@ -21,7 +24,7 @@
 		        </tr>
     		</thead>
 			<tbody>
-			    <tr ng-repeat="a in booksList | orderBy : !toggleSort?'-title':'title' | filter : search | filter : paginate" >	
+			    <tr ng-repeat="a in booksList | orderBy : !toggleSort?'-title':'title' " >	
 			        <td>{{$index + 1}}</td>
 			        <td>{{a.author}}</td>
 			        <td ng-click="showDetails(a._id, a.author, a.title, a.description)">{{a.title}}</td>
@@ -45,12 +48,18 @@
 			</tbody>
 		</table>
 
-		<pagination  
+		<!-- <pagination  
 	        total-items="totalItems" 
 	        items-per-page= "itemsPerPage"
 	        ng-model="currentPage" 
 	        class="pagination-sm">
-    	</pagination>
+    	</pagination> -->
+    	<div>
+    		<a ng-click="getPrev(prevPage)">Previous</a>
+    		
+    		<a ng-click="getNext(nextPage)">Next</a>
+    		
+    	</div>
 
 	</div>
 		<!-- End of List of all Books -->
@@ -60,30 +69,12 @@
 		<div >
 			<h1>{{bookAuthor}} - {{bookTitle}}</h1>				
 			<p>{{bookDescription}}</p>			
-			<a target="_self" href="http://localhost:3000/books/{{bookId}}/download" download="book.pdf">Download</a>
+			<a target="_self" href="http://localhost:3000/books/1/{{bookId}}/download" download="book.pdf">Download</a>
 		</div>
 	</div>
 		<!-- End Book details block -->
 
-		<!-- Edit book -->
-	<div ng-show="bookEditFormStatus">
-		<h1>Edit Book</h1>
-		<form method="POST" action="{{action}}" role="form" enctype="multipart/form-data" >
-			<input type="file"  name="fileUpload" required><br>
-			<input type="text"  name="author" placeholder='Author' required value="{{bookAuthor}}"><br>
-			<input type="text"  name="title" placeholder='Title' required value="{{bookTitle}}"><br>
-			<textarea type="text" name="description" placeholder='Description' required >{{bookDescription}}</textarea><br>
-			<label for="status">Status</label>
-				<select name="status" id="status">
-					<option value="On">On</option>
-					<option value="Off">Off</option>
-				</select>
-			<button type="submit" >Submit</button><br>
-			<button type="button">Cancel</button>
-			
-		</form>
-	</div>
-		<!-- End of Edit book -->
+		
 
 
 </div>

@@ -1,17 +1,18 @@
 <!-- Add book -->
 	<div ng-show="bookAddFormStatus">
 		<h1>Add Book</h1>
-		<form method="POST" action="http://localhost:3000/books/create" role="form" enctype="multipart/form-data" >
-			<input type="file"  name="fileUpload" required><br>
-			<input type="text"  name="author" placeholder='Author' required><br>
-			<input type="text"  name="title" placeholder='Title' required><br>
-			<textarea  name="description" placeholder='Description' required></textarea><br>
-			<select name="status">
+		<form name="addBookForm" ng-submit="submit(file)" enctype="multipart/form-data">
+			<input type="file" ngf-select ng-model="file"   name="file" required><br>
+			<input type="text"  ng-model="author" name="author" placeholder='Author' required><br>
+			<input type="text"  ng-model="title" name="title" placeholder='Title' required><br>
+			<textarea  ng-model="description" name="description" placeholder='Description' required></textarea><br>
+			<label for="status">Status</label>
+			<select ng-model="status" name="status" id="status" required>				
 				<option value="On">On</option>
 				<option value="Off">Off</option>
-			</select>
-			<button type="submit" >Submit</button><br>
-			<button type="button">Cancel</button>
+			</select><br>
+			<button type="submit" >Submit</button>
+			<button type="button" ng-click="reset()">Reset</button>
 			
 		</form>
 	</div>

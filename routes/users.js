@@ -2,22 +2,10 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 
-/* GET Sign Up */
-router.get('/signup', function(req, res, next) {
-  res.render('signup', {title: 'Sign up'});
-});
-
-router.get('/login', function(req, res, next) {
-  res.render('login', {title: 'Login'});
-});
-
-
-//POST route for updating data
-router.post('/', function (req, res, next) {
-  
+//POST for Login and Signup
+router.post('/', function (req, res, next) {  
 
   // confirm that user typed same password twice
-
   if (req.body.password !== req.body.passwordConf) {
     var err = new Error('Passwords do not match.');
     err.status = 400;
@@ -40,12 +28,12 @@ router.post('/', function (req, res, next) {
         return next(error);
       } else {
         req.session.userId = user._id;
-        res.status(200).redirect('/'); 
+        res.status(200).redirect('/books'); 
       }
     });
 
-// Login code
-  } else if (req.body.logemail && req.body.logpassword) { //names of inputs of just login form
+  // Login code
+  } else if (req.body.logemail && req.body.logpassword) { 
     User.authenticate(req.body.logemail, req.body.logpassword, function (error, user) {
       if (error || !user) {
         var err = new Error('Wrong email or password.');
@@ -53,7 +41,7 @@ router.post('/', function (req, res, next) {
         return next(err);
       } else {
         req.session.userId = user._id;
-        return res.redirect('/')
+        return res.status(200).redirect('/books');
       }
     });
   } else {
@@ -62,7 +50,7 @@ router.post('/', function (req, res, next) {
     return next(err);
   }
 
-})
+});
 
 
 
@@ -75,7 +63,7 @@ router.get('/profile', function (req, res, next) {
       } else {
         if (user === null) {
           var err = new Error('Not authorized! Go back!');
-          err.status = 400;
+          err.status = 403;
           return next(err);
         } else {
           return res.send( user.email );

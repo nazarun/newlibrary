@@ -3,10 +3,10 @@
         <nav class='menu'>
             <ul>
                 <li>
-                    <a ng-click="chooseBooks()" >Books</a>
+                    <a href="books" ng-click="chooseBooks()" >Books</a>
                 </li>        
                 <li>
-                    <a ng-click="chooseAddBook()" >Add</a>
+                    <a href="add" ng-click="chooseAddBook()">Add</a>
                 </li>
                  <li>
                     <a ng-click="chooseEditBook(_id)" >Edit</a>
@@ -16,7 +16,7 @@
 
         <div class="profile">
             <div class="login-btn">
-                <button type="button" ng-click="showLogin()">User login:</button>
+                <a href="login">User login:</a>
             </div>
             <div ng-show="userDataStatus">
                 {{userData}}
