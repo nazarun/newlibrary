@@ -7,7 +7,7 @@ app.directive('menu', function(){
            $scope.menuStatus = true;
            $scope.userDataStatus = true;
            $scope.logoutStatus = true;
-$scope.userData = undefined;
+
             //Button Books
             $scope.chooseBooks = function(){
                 $scope.bookAddFormStatus = false;
@@ -17,12 +17,12 @@ $scope.userData = undefined;
                 $scope.bookDetailsStatus = false;
             };
             //Button Add
-            $scope.chooseAddBook = function(){
+            $scope.chooseAddBook = function(){                
                 $scope.bookAddFormStatus = true;
                 $scope.allBooks = false;
                 $scope.bookEditFormStatus = false;
                 $scope.loginStatus = false;
-                $scope.bookDetailsStatus = false;
+                $scope.bookDetailsStatus = false;                                
             }; 
             //Button Edit
             $scope.chooseEditBook = function(){
@@ -41,14 +41,14 @@ $scope.userData = undefined;
                 $scope.bookDetailsStatus = false;                                          
             };
 
-            //show user data            
+                //show user data            
                 $http.get(URLUSERS + 'profile')
                 .then(function successCallback(response){
-                    $scope.userData = response.data;                                                  
-                }, function errorCallback(response) { 
-                console.log("Error!!!" + response.err);
+                    $scope.userData = response.data;                                                                    
+                }, function errorCallback(response) {                     
+                    $scope.userData = response.data.error;                    
                 });           
-            //end of user data
+                //end of user data
 
             //logout
             $scope.logout = function(){

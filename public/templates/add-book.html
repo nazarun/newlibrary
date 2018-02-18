@@ -1,13 +1,13 @@
 <!-- Add book -->
-	<div ng-show="bookAddFormStatus">
+	<div ng-show="bookAddFormStatus" ng-controller="AddBookController">
 		<h1>Add Book</h1>
-		<form name="addBookForm" ng-submit="submit(file)" enctype="multipart/form-data">
-			<input type="file" ngf-select ng-model="file"   name="file" required><br>
-			<input type="text"  ng-model="author" name="author" placeholder='Author' required><br>
-			<input type="text"  ng-model="title" name="title" placeholder='Title' required><br>
-			<textarea  ng-model="description" name="description" placeholder='Description' required></textarea><br>
+		<form name="addBookForm" ng-submit="submit(file)" enctype="multipart/form-data" novalidate>
+			<input type="file" ngf-select ng-model="file"   name="file" ng-required="true"><br>
+			<input type="text"  ng-model="author" name="author" placeholder='Author' ><br>
+			<input type="text"  ng-model="title" name="title" placeholder='Title' ><br>
+			<textarea  ng-model="description" name="description" placeholder='Description' ></textarea><br>
 			<label for="status">Status</label>
-			<select ng-model="status" name="status" id="status" required>				
+			<select ng-model="status" name="status" id="status" >				
 				<option value="On">On</option>
 				<option value="Off">Off</option>
 			</select><br>
@@ -15,5 +15,7 @@
 			<button type="button" ng-click="reset()">Reset</button>
 			
 		</form>
+		<p class="success">{{bookAdded}}</p>		
+		<p class="error" ng-repeat="b in addBookError">{{b.msg}}</p>
 	</div>
 <!-- End of Add book -->

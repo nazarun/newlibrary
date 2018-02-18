@@ -1,15 +1,19 @@
 body {
-  max-width: 800px;
-  margin: 0 auto;
+	max-width: 800px;
+	margin: 0 auto;
 }
 
 a {
-  color: blue;
+	color: blue;
 }
-h1{
+
+h1 {
 	margin:0;
 }
-.nav{border:2px solid black;}
+
+.nav {
+	border:2px solid black;
+}
 
 .nav ul li {
 	float: left;
@@ -22,24 +26,26 @@ h1{
 	font-weight: 800;
 	color: #2c2c54;
 }
+
 .profile {
 	float: right;
 }
-.clear{
+
+.clear {
 	clear: both;
 }
 
-th, td{
+th, td {
 	padding: 10px;
 }
+
 .title{
 	float: left;
 }
-#search{
-	
+
+#search {	
 	margin:10px 0;
 }
-
 
 .rating {
     color: #a9a9a9;
@@ -62,4 +68,12 @@ ul.rating {
 
 .rating .filled {
     color: blue;
+}
+
+.error {
+	color: red;
+}
+
+.success {
+	color: green;
 }

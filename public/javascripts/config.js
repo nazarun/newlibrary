@@ -9,15 +9,14 @@ app.config(function ($routeProvider) {
     $routeProvider
         .when('/login', {
             template: '<login></login>'
-            //templateUrl: 'templates/login.html'
         })
-        .when('/books', {
-            template: '<all-books></all-books>'
-            //templateUrl: 'templates/books.html'
+        .when('/books', {            
+            templateUrl: 'templates/books.html',
+            controller: 'listBooksController'
         })
-        .when('/add', {
-            template: '<add-book></add-book>'
-            //templateUrl: 'templates/add-book.html'
+        .when('/add', {            
+            templateUrl: 'templates/add-book.html',
+            controller: 'AddBookController'
         })
         .otherwise({
             redirectTo: '/login'

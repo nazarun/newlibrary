@@ -3,14 +3,15 @@
 <!-- User login -->
 	<div ng-show="loginFormStatus">
 		<h1>User Login</h1>
-		<form name="login" ng-submit="userLogin()" >
-			<input name="logemail" ng-model="formData.logemail" type="text" placeholder="Email Address" required><br>
-			<input name="logpassword" ng-model="formData.logpassword" type="password" placeholder="Password" required><br>			
+		<form name="login" ng-submit="userLogin()" novalidate>
+			<input name="logemail" ng-model="formData.logemail" type="text" placeholder="Email Address" ><br>
+			<input name="logpassword" ng-model="formData.logpassword" type="password" placeholder="Password" ><br>			
 			
 			<button type="submit">Login</button>
 			<button type="button" ng-click="showSignup()">Sign up</button>
 			
 		</form>
+		<p class="error" ng-repeat="b in errorLoginMessage">{{b.msg}}</p>
 	</div>
 <!-- End of User login -->
 
@@ -19,15 +20,15 @@
 <!-- User signup -->
 	<div ng-show="signupFormStatus">
 		<h1>User signUp</h1>
-		<form name="signup" ng-submit="userSignup()" >
-			<input name="email" ng-model="formData.email" type="text" placeholder="Email Address" required><br>
-			<input name="password" ng-model="formData.password" type="password" placeholder="Password" required><br>
-			<input name ="passwordConf" ng-model="formData.passwordConf" type="password" placeholder="Confirm Password" required><br>
+		<form name="signup" ng-submit="userSignup()" novalidate>
+			<input name="email" ng-model="formData.email" type="text" placeholder="Email Address" ><br>
+			<input name="password" ng-model="formData.password" type="password" placeholder="Password" ><br>			
 			
 			<button type="submit">SignUp</button>
 			<button type="button" ng-click="showLogin()">Login</button>			
 			
 		</form>
+		<p class="error" ng-repeat="b in errorSignupMessage">{{b.msg}}</p>
 	</div>
 <!-- End of User signup -->
 

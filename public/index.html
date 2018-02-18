@@ -11,18 +11,18 @@
     <link rel="stylesheet" href="./stylesheets/style.css">    
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     
-    <script src="./javascripts/jquery-2.1.3.min.js"></script>
-    <script src="./javascripts/angular.min.js"></script>    
-    <script src="./javascripts/angular-route.js"></script> 
-    <script src="./javascripts/ng-file-upload.js"></script>   
-    <script src="./javascripts/ui-bootstrap-tpl.js"></script>    
+    <script src="./javascripts/libs/jquery-2.1.3.min.js"></script>
+    <script src="./javascripts/libs/angular.min.js"></script>    
+    <script src="./javascripts/libs/angular-route.js"></script> 
+    <script src="./javascripts/libs/ng-file-upload.js"></script>   
+    <script src="./javascripts/libs/ui-bootstrap-tpl.js"></script>    
     <script src="./javascripts/my.js"></script>
     <script src="./javascripts/config.js"></script>
-    <script src="./javascripts/controller.js"></script>
-    <script src="./javascripts/directives/allbooks.js"></script>
-    <script src="./javascripts/directives/menu.js"></script>
-    <script src="./javascripts/directives/addbook.js"></script>
-    <script src="./javascripts/directives/editbook.js"></script>
+    <script src="./javascripts/controllers/controller.js"></script>
+    <script src="./javascripts/controllers/listBooksController.js"></script>
+    <script src="./javascripts/controllers/AddBookController.js"></script>
+    <script src="./javascripts/controllers/editBookController.js"></script>    
+    <script src="./javascripts/directives/menu.js"></script>    
     <script src="./javascripts/directives/login.js"></script>
 </head>
 
@@ -33,29 +33,7 @@
         <menu></menu>
     </div>
 
-    <div ng-view></div>
-
-    
-
-    <!-- <div>
-        <all-books></all-books>
-    </div> -->
-
-    <!-- <div>
-        <add-book></add-book>
-    </div> -->
-
-    <div>
-        <edit-book></edit-book>
-    </div>
-
-    <!-- <div>
-        <signup></signup>
-    </div> -->
-
-    <!-- <div>
-        <login></login>
-    </div> -->
+    <div ng-view></div>   
 
 
     

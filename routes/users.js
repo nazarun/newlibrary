@@ -3,55 +3,53 @@ var router = express.Router();
 var User = require('../models/user');
 
 //POST for Login and Signup
-router.post('/', function (req, res, next) {  
+router.post('/signup', function (req, res, next) {
 
-  // confirm that user typed same password twice
-  if (req.body.password !== req.body.passwordConf) {
-    var err = new Error('Passwords do not match.');
-    err.status = 400;
-    res.send("passwords dont match");
-    return next(err);
-  }
-
-  if (req.body.email &&    
-    req.body.password &&
-    req.body.passwordConf) {
-
+  req.checkBody('email', 'Enter a valid email address').isEmail();
+  req.checkBody('password', 'Password required, min 5 symbols').isLength({min:5});
+  //errors handling
+  var errors = req.validationErrors();
+  if (errors) {   
+    return res.status(403).send({error: errors});    
+  } else {
+    // normal processing here
     var userData = {
       email: req.body.email,      
-      password: req.body.password,
-      passwordConf: req.body.passwordConf,
-    }
+      password: req.body.password,   
+    };
 
     User.create(userData, function (error, user) {
-      if (error) {
-        return next(error);
+      if (error) {          
+        return res.status(403).send({error: [{ msg: "Something went wrong. User is not created" }] });
       } else {
         req.session.userId = user._id;
         res.status(200).redirect('/books'); 
       }
     });
+  }
+});
 
   // Login code
-  } else if (req.body.logemail && req.body.logpassword) { 
+router.post('/login', function (req, res, next) {
+   
+  req.checkBody('logemail', 'Wrong email address').isEmail();
+  req.checkBody('logpassword', 'Wrong password, min 5 symbols').isLength({min:5});
+  //errors handling
+  var errors = req.validationErrors();
+  if (errors) {   
+    return res.status(403).send({error: errors});    
+  } else {
+    // normal processing here
     User.authenticate(req.body.logemail, req.body.logpassword, function (error, user) {
-      if (error || !user) {
-        var err = new Error('Wrong email or password.');
-        err.status = 401;
-        return next(err);
+      if (error || !user) {        
+        return res.status(403).send({error: [{ msg: "Wrong email or password" }] }); 
       } else {
         req.session.userId = user._id;
         return res.status(200).redirect('/books');
       }
     });
-  } else {
-    var err = new Error('All fields required.');
-    err.status = 400;
-    return next(err);
-  }
-
+  }  
 });
-
 
 
 // GET route after registering
@@ -61,10 +59,8 @@ router.get('/profile', function (req, res, next) {
       if (error) {
         return next(error);
       } else {
-        if (user === null) {
-          var err = new Error('Not authorized! Go back!');
-          err.status = 403;
-          return next(err);
+        if (user === null) {          
+          return res.status(403).send({error: 'Not authorized! Please login or signup'});
         } else {
           return res.send( user.email );
         }

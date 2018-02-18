@@ -1,20 +1,24 @@
 <!-- Edit book -->
-	<div ng-show="bookEditFormStatus">
+<div ng-controller="editBookController">
+	<div ng-show="bookEditFormStatus" >
 		<h1>Edit Book</h1>
-		<form name="editBookForm" ng-submit="updateBook(file)"   enctype="multipart/form-data" >
+		<form name="editBookForm" ng-submit="updateBook(file)"   enctype="multipart/form-data" novalidate>
 			<input type="hidden" name="id" ng-model="id"><br>
-			<input type="file"  ngf-select ng-model="file" name="file" required><br>
-			<input type="text"  ng-model="author" name="author" placeholder='Author' required ><br>
-			<input type="text" ng-model="title" name="title" placeholder='Title' required ><br>
-			<textarea type="text" ng-model="description" name="description" placeholder='Description' required ></textarea><br>
+			<input type="file"  ngf-select ng-model="file" name="file"><br>
+			<input type="text"  ng-model="author" name="author" placeholder='Author' ><br>
+			<input type="text" ng-model="title" name="title" placeholder='Title' ><br>
+			<textarea type="text" ng-model="description" name="description" placeholder='Description' ></textarea><br>
 			<label for="status">Status</label>
 				<select name="status" ng-model="status" id="status">
 					<option value="On">On</option>
 					<option value="Off">Off</option>
 				</select><br>
 			<button type="submit" >Submit</button>
-			<button type="button">Cancel</button>
+			<button type="button" ng-click="cancel()">Cancel</button>
 			
 		</form>
+		<p class="success">{{bookEdited}}</p>
+		<p class="error" ng-repeat="b in editBookError">{{b.msg}}</p>
 	</div>
+</div>
 <!-- End of Edit book -->

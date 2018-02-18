@@ -1,80 +1,74 @@
 
-<div>
-		<!-- List of all books -->
-	<div ng-show="allBooks">
+<div>	
+	<!-- List of all books -->
+	<div ng-show="allBooks" >
 		<div>
 			<h1 class="title">Books</h1>
-			<form>
+			<form ng-submit="searchBook()" >
 				<input type="text" id="search" placeholder="Search" ng-model="search">
-				<button type="submit" ng-click="searchBook()">Search</button>
+				<button type="submit">Search</button>
 			</form>
 			<div class="clear"></div>
 		</div>
 
+		<div ng-controller="editBookController">
+			<table>
+				<thead>
+			        <tr>	        	
+			            <th>№</th>
+			            <th>Author</th>
+			            <th ng-click="toggleSort=!toggleSort">Title &#11021;</th>
+			            <th>Rating</th>
+			            <th>Satus</th>
+			            <th>Actions</th>
+			        </tr>
+	    		</thead>
+				<tbody>
+				    <tr ng-repeat="a in booksList | orderBy : !toggleSort?'-title':'title' " >	
+				        <td>{{$index + 1}}</td>
+				        <td>{{a.author}}</td>
+				        <td ng-click="showDetails(a._id, a.author, a.title, a.description)">{{a.title}}</td>
+				        <td ng-controller="StarCtrl">
+				        	<ul class="rating">
+					            <li ng-repeat="n in [].constructor(maxRating) track by $index">
+					                <span ng-click="rateBy($index+1)" ng-show="ratedBy > $index" class="filled">&#9733;</span>
+					                <span ng-click="rateBy($index+1)" ng-show="ratedBy <= $index">&#9733;</span>
+					            </li>
+	        				</ul>
+				        </td>
+				        <td>
+				        	on<input id="on" type="radio"  ng-model="a.status" value="ON" > {{a.status}}       
+				        	<input id="off" type="radio"  ng-model="a.status" value="OFF" >off
+				        </td>
+				        <td>
+					        <button ng-click="editBook(a._id, a.author, a.title, a.description, a.status)">Edit</button>
+					        <button ng-click="deleteBook(a._id)">Delete</button>
+					    </td>
+				    </tr>
+				</tbody>
+			</table>
 
-		<table>
-			<thead>
-		        <tr>	        	
-		            <th>№</th>
-		            <th>Author</th>
-		            <th ng-click="toggleSort=!toggleSort">Title &#11021;</th>
-		            <th>Rating</th>
-		            <th>Satus</th>
-		            <th>Actions</th>
-		        </tr>
-    		</thead>
-			<tbody>
-			    <tr ng-repeat="a in booksList | orderBy : !toggleSort?'-title':'title' " >	
-			        <td>{{$index + 1}}</td>
-			        <td>{{a.author}}</td>
-			        <td ng-click="showDetails(a._id, a.author, a.title, a.description)">{{a.title}}</td>
-			        <td ng-controller="StarCtrl">
-			        	<ul class="rating">
-				            <li ng-repeat="n in [].constructor(maxRating) track by $index">
-				                <span ng-click="rateBy($index+1)" ng-show="ratedBy > $index" class="filled">&#9733;</span>
-				                <span ng-click="rateBy($index+1)" ng-show="ratedBy <= $index">&#9733;</span>
-				            </li>
-        				</ul>
-			        </td>
-			        <td>
-			        	on<input id="on" type="radio"  ng-model="a.status" value="ON" > {{a.status}}       
-			        	<input id="off" type="radio"  ng-model="a.status" value="OFF" >off
-			        </td>
-			        <td>
-				        <button ng-click="editBook(a._id, a.author, a.title, a.description, a.status)">Edit</button>
-				        <button ng-click="deleteBook(a._id)">Delete</button>
-				    </td>
-			    </tr>
-			</tbody>
-		</table>
+			<div>
+	    		<a ng-click="getPrev(prevPage)">Previous</a>	    		
+	    		<a ng-click="getNext(nextPage)">Next</a>	    		
+	    	</div>
 
-		<!-- <pagination  
-	        total-items="totalItems" 
-	        items-per-page= "itemsPerPage"
-	        ng-model="currentPage" 
-	        class="pagination-sm">
-    	</pagination> -->
-    	<div>
-    		<a ng-click="getPrev(prevPage)">Previous</a>
-    		
-    		<a ng-click="getNext(nextPage)">Next</a>
-    		
-    	</div>
+			<!-- Include Edit Book Form -->
+			<div ng-include src="'templates/edit-book.html'"></div>	
+		</div>
+		
+    	<p>{{errorMsg}}</p>
 
 	</div>
-		<!-- End of List of all Books -->
+	<!-- End of List of all Books -->
 
-		<!-- Book detais block -->
-	<div ng-show="bookDetailsStatus">
-		<div >
+	<!-- Book detais block -->
+	<div ng-show="bookDetailsStatus" >
+		<div>
 			<h1>{{bookAuthor}} - {{bookTitle}}</h1>				
 			<p>{{bookDescription}}</p>			
 			<a target="_self" href="http://localhost:3000/books/1/{{bookId}}/download" download="book.pdf">Download</a>
 		</div>
 	</div>
-		<!-- End Book details block -->
-
-		
-
-
+	<!-- End Book details block -->	
 </div>

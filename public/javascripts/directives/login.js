@@ -18,19 +18,21 @@ app.directive('login', function(){
                 $scope.loginFormStatus = true;
                 $scope.signupFormStatus = false;
             }
+
             //login POST
             $scope.userLogin = function(){
                 $http({
                     method: 'POST',
-                    url: URLUSERS,
-                    data: $scope.formData,
+                    url: URLUSERS + 'login',
+                    data: $scope.formData,                    
                 })
-                .then(function(response){                  
+
+                .then(function(response){                                    
                     $window.location.reload();                    
                     $location.path('/books');
                 })
-                .catch(function(err){
-                    console.log(err);
+                .catch(function(err){                                        
+                    $scope.errorLoginMessage = err.data.error;                    
                 });
             }
 
@@ -38,17 +40,16 @@ app.directive('login', function(){
             $scope.userSignup = function(){
                 $http({
                     method: 'POST',
-                    url: URLUSERS,
+                    url: URLUSERS + 'signup',
                     data: $scope.formData,
                 })
                 .then(function(response){
                     $window.location.reload();                    
                     $location.path('/books');
                 })
-                .catch(function(err){
-                    console.log(err);
+                .catch(function(err){                    
+                    $scope.errorSignupMessage = err.data.error;
                 });
-
             }
         }
     }
